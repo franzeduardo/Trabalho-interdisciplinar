@@ -1,0 +1,62 @@
+-- Hospede
+CREATE TABLE Hospede(
+	CPF INTEGER (11) NOT NULL,
+	NOME VARCHAR (100) NOT NULL,
+	DATANASCIMENTO DATE
+	);
+
+--PK Hospede
+ALTER TABLE Hospede ADD CONSTRAINT Hospede_pk PRIMARY KEY (CPF);
+
+
+
+/****************************************************************************************************************/
+
+
+-- Hospedagem
+CREATE TABLE Hospedagem(
+	CODIGO INTEGER NOT NULL,
+	CPF_HOSPEDE INTEGER (11) NOT NULL,
+	DATAENTRADA DATE NOT NULL,
+	DATASAIDA DATE NOT NULL,
+	VALORFINAL DECIMAL(2) NOT NULL
+	);
+
+--PK Hospedagem
+ALTER TABLE Hospedagem ADD CONSTRAINT Hospedagem_pk PRIMARY KEY (CODIGO);
+
+--FK Hospedagem 
+ALTER TABLE Hospedagem ADD CONSTRAINT Hospede_Hospedagem_fk FOREIGN KEY (CPF_HOSPEDE) REFERENCES Hospede (CPF);
+
+
+
+/****************************************************************************************************************/
+
+
+-- Quarto
+CREATE TABLE Quarto(
+	NUMERO INTEGER NOT NULL,	
+	VALORDIARIA DECIMAL(2) NOT NULL
+	SIGLA_TIPO CHAR NOT NULL
+	);
+
+--PK Quarto
+ALTER TABLE Quarto ADD CONSTRAINT Quarto_pk PRIMARY KEY (NUMERO);
+
+--FK Quarto
+ALTER TABLE Quarto ADD CONSTRAINT TipoQuarto_Quarto_fk FOREIGN KEY (CPF_HOSPEDE) REFERENCES TipoQuarto (SIGLA_TIPO);
+
+
+
+/****************************************************************************************************************/
+
+
+-- TipoQuarto
+CREATE TABLE Quarto(
+	SIGLA_TIPO CHAR NOT NULL
+	TIPO_QUARTO VARCHAR (15) NOT NULL,
+	DESCRICAO VARCHAR (100) NOT NULL
+	);
+
+--PK TipoQuarto
+ALTER TABLE TipoQuarto ADD CONSTRAINT TipoQuarto_pk PRIMARY KEY (SIGLA_TIPO);

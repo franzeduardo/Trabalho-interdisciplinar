@@ -1,0 +1,44 @@
+
+*************** Seleciona os hospedes hospedados no dia *******************************
+SELECT h.nome, h.cpf, hs.dataEntrada, hs.dataSaida, hs.valorFinal, hs.numeroQuarto FROM 
+HOSPEDE h, HOSPEDAGEM hs 
+WHERE
+h.cpf = hs.cpf AND 
+hs.dataEntrada = ()now
+ORDER BY hs.dataEntrada;
+
+
+
+
+
+****** Seleciona os hospedados ordenando por nome *******
+SELECT h.nome, h.cpf, hs.numeroQuarto, tq.tipoQuarto FROM
+HOSPEDE h, HOSPEDAGEM hs, QUARTO q, TIPOQUARTO tq
+WHERE
+tq.sigla_tipo = q.sigla_tipo AND
+q.numero = hs.numeroQuarto
+ORDER BY h.nome;
+
+
+
+
+
+********* Seleciona os quartos do hotel *********
+SELECT q.numero, tq.tipoQuarto, tq.descricao FROM
+QUARTO q, TIPOQUARTO tq
+WHERE
+tq.sigla_tipo = q.sigla_tipo
+ORDER BY q.numero;
+
+
+
+
+
+
+****** Seleciona os quartos livres do Hotel *****
+SELECT q.numero, tq.tipoQuarto, tq.descricao FROM
+QUARTO q, TIPOQUARTO tq
+WHERE
+tq.sigla_tipo = q.sigla_tipo AND
+q.disponivel = 1
+ORDER BY q.numero;
